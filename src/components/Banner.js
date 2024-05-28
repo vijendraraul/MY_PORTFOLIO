@@ -5,14 +5,28 @@ import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
+
+
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Software Developer", "Web Developer", "UI/UX Designer" ];
+  const toRotate = ["Software Developer", "Web Developer", "UI/UX Designer"];
   const period = 2000;
+  const PDF_FILE_URL="http://localhost:3000/CV.pdf"
+
+  const downloadFileAtURL=(url)=>{
+    const fileName = url.split('/').pop();
+    const aTag= document.createElement('a');
+      aTag.href=url;
+      aTag.setAttribute('download',fileName);
+      document.body.appendChild(aTag);
+      aTag.click();
+      aTag.remove();
+    
+  };
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -54,19 +68,22 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Vijendra`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Developer", "Web Developer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <span className="tagline">Welcome to my Portfolio</span>
+                  <h1>{`Hi! I'm Vijendra`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Developer", "Web Developer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
                   <p>Front-end Developer / Java Expert <br></br> Angualr Expert / React Expert</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
-              </div>}
+                  <button onClick={()=>{downloadFileAtURL(PDF_FILE_URL)}}>Download Resume<ArrowRightCircle size={25} /></button>
+
+                
+                  
+                </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img src={headerImg} alt="Header Img" />
                 </div>}
             </TrackVisibility>
           </Col>
